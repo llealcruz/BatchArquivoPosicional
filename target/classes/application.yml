@@ -1,0 +1,47 @@
+spring: 
+  main:
+    banner-mode: 'off'
+  application:
+    name: sample-project-batch
+#  jpa:
+#    database-platform: org.hibernate.dialect.Oracle12cDialect
+#    hibernate:
+#      ddl-auto: none
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        generate_statistics: false
+#        jdbc: 
+#          batch_size: 500
+#          batch_versioned_data: true
+#        order_inserts: true
+#  flyway:
+#    enabled: false
+#    url: 
+#    user: 
+#    password: 
+#    locations: 
+#    outOfOrder: true
+#  datasource:
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+info:
+  app:
+    name: sample-project-batch
+api:
+  version: 1
+#oracle:
+#  url: 
+#  username: 
+#  password: 
+#  wallet: false
+logging:
+  level:
+    root: INFO
+llealcruz-dir:
+  rx: C:\Users\lleal\Documents\d\ftp\rx
+  ro: C:\Users\lleal\Documents\d\ftp\ro
+  tx: C:\Users\lleal\Documents\d\ftp\tx
+  erro: C:\Users\lleal\Documents\d\ftp\erro
+  temp: C:\Users\lleal\Documents\d\ftp\temp
+file-patterns:
+  gerar-arquivo-primeirojob: PrimeiroJob.txt
