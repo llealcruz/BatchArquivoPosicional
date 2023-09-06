@@ -6,12 +6,12 @@ import java.util.Objects;
 
 public class DateUtils {
 
-	private DateUtils() {
-		// vazio
-	}
+    private DateUtils() {
+        // vazio
+    }
 
-	public static String getDataValueString(LocalDate date) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-		return Objects.nonNull(date) ? date.format(formatter) : "";
-	}
+    public static String getDataValueString(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        return Objects.nonNull(date) ? date.format(formatter) : "";
+    }
 }

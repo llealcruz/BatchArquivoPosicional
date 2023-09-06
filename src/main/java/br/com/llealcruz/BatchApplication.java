@@ -1,7 +1,8 @@
 package br.com.llealcruz;
 
-import java.util.Locale;
-
+import br.com.llealcruz.base.BaseJob;
+import br.com.llealcruz.enumeration.ProcessEnum;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,43 +10,41 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 
-import br.com.llealcruz.base.BaseJob;
-import br.com.llealcruz.enumeration.ProcessEnum;
-import lombok.extern.log4j.Log4j2;
+import java.util.Locale;
 
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @Log4j2
 public class BatchApplication implements CommandLineRunner {
 
-	@Autowired
-	private ApplicationContext appContext;
+    @Autowired
+    private ApplicationContext appContext;
 
-	public static void main(String[] args) {
-		SpringApplication.run(BatchApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BatchApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 
-		if (args.length == 0) {
-			log.error("Parametros nao informados");
-		}
+        if (args.length == 0) {
+            log.error("Parametros nao informados");
+        }
 
-		final BaseJob processo = getInstace(args);
-		processo.run(args);
+        final BaseJob processo = getInstace(args);
+        processo.run(args);
 
-		log.info("Processamento executado com sucesso");
-	}
+        log.info("Processamento executado com sucesso");
+    }
 
-	public BaseJob getInstace(String... args) {
+    public BaseJob getInstace(String... args) {
 
-		final ProcessEnum tipoProcesso = ProcessEnum.buscarProcessoPorCodigo(args[0]);
+        final ProcessEnum tipoProcesso = ProcessEnum.buscarProcessoPorCodigo(args[0]);
 
-		log.info("JOB: {} - {}", tipoProcesso.getCodigo(), tipoProcesso.getClasse().getSimpleName());
+        log.info("JOB: {} - {}", tipoProcesso.getCodigo(), tipoProcesso.getClasse().getSimpleName());
 
-		return (BaseJob) appContext.getBean(tipoProcesso.getClasse().getSimpleName().substring(0, 1)
-				.toLowerCase(new Locale("pt", "BR")).concat(tipoProcesso.getClasse().getSimpleName().substring(1)));
+        return (BaseJob) appContext.getBean(tipoProcesso.getClasse().getSimpleName().substring(0, 1)
+                .toLowerCase(new Locale("pt", "BR")).concat(tipoProcesso.getClasse().getSimpleName().substring(1)));
 
-	}
+    }
 
 }
